@@ -1,0 +1,98 @@
+.cartao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
+  padding: var(--espaco-4);
+  background: var(--superficie-cartao);
+  border: var(--largura-borda) solid var(--cor-borda);
+  border-left-width: 4px;
+  border-radius: var(--raio-cartao);
+  box-shadow: var(--sombra-cartao);
+}
+
+.mensagem {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-md);
+  font-weight: var(--peso-forte);
+  line-height: var(--altura-linha-base);
+  letter-spacing: var(--rastreio-titulo);
+}
+
+.contexto {
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-secundario);
+  line-height: var(--altura-linha-solta);
+}
+
+.detalhe {
+  border-top: var(--largura-borda) dashed var(--cor-borda);
+  padding-top: var(--espaco-2);
+}
+
+.resumo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  cursor: pointer;
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-medio);
+  color: var(--cor-marca-forte);
+  list-style: none;
+}
+
+.resumo::-webkit-details-marker {
+  display: none;
+}
+
+.resumo::before {
+  content: "+";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--raio-completo);
+  border: var(--largura-borda) solid var(--cor-marca-borda);
+  background: var(--cor-marca-suave);
+  font-weight: var(--peso-forte);
+}
+
+.detalhe[open] .resumo::before {
+  content: "−";
+}
+
+.numeros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-4);
+  margin-top: var(--espaco-3);
+}
+
+.numero {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rotuloNumero {
+  font-size: var(--texto-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cor-texto-fraco);
+}
+
+.valorNumero {
+  font-size: var(--texto-lg);
+  font-weight: var(--peso-forte);
+  font-variant-numeric: tabular-nums;
+}
+
+.acao {
+  margin-top: var(--espaco-2);
+}
+
+.neutro { border-left-color: var(--cor-borda-forte); }
+.informacao { border-left-color: var(--cor-informacao-forte); }
+.sucesso { border-left-color: var(--cor-sucesso-forte); }
+.atencao { border-left-color: var(--cor-atencao-forte); }
+.perigo { border-left-color: var(--cor-perigo-forte); }

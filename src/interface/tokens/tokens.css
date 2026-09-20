@@ -26,6 +26,9 @@
    * ---------------------------------------------------------------- */
   --fonte-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --fonte-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  /* Titulos podem ter familia propria no tema da marca; por padrao seguem o corpo. */
+  --fonte-titulo: var(--fonte-base);
+  --rastreio-titulo: 0;
 
   --texto-xs: 0.6875rem;  /* 11px — rotulo de tabela, legenda */
   --texto-sm: 0.8125rem;  /* 13px — texto de apoio */
@@ -51,6 +54,8 @@
   --raio-2: 6px;
   --raio-3: 10px;
   --raio-completo: 999px;
+  /* Raio dos cartoes: o tema da marca costuma querer um valor proprio. */
+  --raio-cartao: var(--raio-2);
 
   --largura-borda: 1px;
   --largura-borda-forte: 2px;
@@ -79,8 +84,17 @@
    *    -borda. Cor NUNCA e o unico portador de significado.           *
    * ---------------------------------------------------------------- */
   --cor-marca-forte: #17548c;
+  --cor-marca-media: #2b6ca8;
   --cor-marca-suave: #e8f0f8;
   --cor-marca-borda: #a9c6e0;
+  --cor-marca-contraste: #ffffff;
+  --marca-gradiente: linear-gradient(135deg, #17548c 0%, #2b6ca8 100%);
+
+  /* Acento: usado em destaques e em graficos, nunca como unica informacao. */
+  --cor-acento-forte: #5b4a00;
+  --cor-acento-grafico: #b99400;
+  --cor-acento-suave: #fbf4dc;
+  --cor-acento-borda: #e0cd8c;
 
   --cor-neutro-forte: #4b5563;
   --cor-neutro-suave: #eef1f4;
@@ -124,6 +138,7 @@
   --sombra-1: 0 1px 2px rgba(22, 25, 29, 0.06);
   --sombra-2: 0 2px 8px rgba(22, 25, 29, 0.09);
   --sombra-3: 0 12px 32px rgba(22, 25, 29, 0.16);
+  --sombra-cartao: var(--sombra-1);
 
   /* ---------------------------------------------------------------- *
    * 8. Movimento                                                      *

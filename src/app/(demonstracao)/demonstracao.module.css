@@ -1,0 +1,97 @@
+/*
+ * Estilos compartilhados pelas telas de demonstracao: grades, pilhas e
+ * blocos. Somente layout — cor, raio e sombra continuam nos componentes.
+ */
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-6);
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+}
+
+.pilha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+}
+
+.linhaDeAcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+
+.grade2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: var(--espaco-4);
+}
+
+.grade3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: var(--espaco-4);
+}
+
+.grade4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--espaco-4);
+}
+
+/* Conteudo principal + coluna de apoio; vira uma coluna so no tablet. */
+.duasColunas {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--espaco-5);
+}
+
+.bloco {
+  padding: var(--espaco-5);
+  background: var(--superficie-cartao);
+  border: var(--largura-borda) solid var(--cor-borda);
+  border-radius: var(--raio-cartao);
+  box-shadow: var(--sombra-cartao);
+}
+
+.aviso {
+  padding: var(--espaco-4);
+  border-radius: var(--raio-cartao);
+  background: var(--cor-acento-suave);
+  border: var(--largura-borda) solid var(--cor-acento-borda);
+  color: var(--cor-acento-forte);
+  font-size: var(--texto-sm);
+  line-height: var(--altura-linha-solta);
+}
+
+/* Tabela some no celular; a lista de cartoes toma o lugar dela. */
+.somenteTabela {
+  display: block;
+}
+
+.somenteCartoes {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .duasColunas {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .somenteTabela {
+    display: none;
+  }
+  .somenteCartoes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-3);
+  }
+}

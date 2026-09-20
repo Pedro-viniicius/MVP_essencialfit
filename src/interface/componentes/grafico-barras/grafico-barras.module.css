@@ -1,0 +1,73 @@
+.figura {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+}
+
+.grafico {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--espaco-2);
+  height: 180px;
+  padding-top: var(--espaco-5);
+  /* Linha de base discreta: o eixo nunca compete com os dados. */
+  border-bottom: var(--largura-borda) solid var(--cor-borda);
+}
+
+.coluna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--espaco-1);
+  height: 100%;
+  min-width: 0;
+}
+
+.barra {
+  width: 100%;
+  max-width: 44px;
+  /* Ponta arredondada apenas no topo: a barra fica ancorada na linha de base. */
+  border-radius: var(--raio-1) var(--raio-1) 0 0;
+  background: var(--cor-marca-media);
+}
+
+.emDestaque {
+  background: var(--cor-marca-forte);
+}
+
+.valorDireto {
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-forte);
+  font-variant-numeric: tabular-nums;
+  color: var(--cor-texto-primario);
+  white-space: nowrap;
+}
+
+.rotulos {
+  display: flex;
+  gap: var(--espaco-2);
+}
+
+.rotulo {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-secundario);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rotuloDestaque {
+  font-weight: var(--peso-forte);
+  color: var(--cor-texto-primario);
+}
+
+.legenda {
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-secundario);
+}

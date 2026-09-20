@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { Logotipo } from "../marca/logotipo";
 import estilos from "./casca-simples.module.css";
 
 /**
@@ -10,7 +11,9 @@ export function CascaSimples({ children }: { readonly children: ReactNode }) {
   return (
     <div className={estilos.pagina}>
       <main id="conteudo" className={estilos.cartao}>
-        <p className={estilos.marca}>Financeiro</p>
+        <p className={estilos.marca}>
+          <Logotipo comAssinatura />
+        </p>
         {children}
       </main>
     </div>

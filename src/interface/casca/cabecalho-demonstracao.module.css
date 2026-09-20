@@ -1,0 +1,109 @@
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-4);
+  min-height: var(--altura-cabecalho);
+  flex: none;
+  padding: var(--espaco-2) var(--espaco-4);
+  background: var(--superficie-barra);
+  border-bottom: var(--largura-borda) solid var(--cor-borda);
+}
+
+.marca {
+  flex: none;
+}
+
+.unidade {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--espaco-1) var(--espaco-3);
+  background: var(--cor-marca-suave);
+  border: var(--largura-borda) solid var(--cor-marca-borda);
+  border-radius: var(--raio-2);
+}
+
+.rotuloUnidade {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cor-marca-forte);
+}
+
+.nomeUnidade {
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-forte);
+  color: var(--cor-marca-forte);
+}
+
+.busca {
+  flex: 1;
+  max-width: 360px;
+}
+
+.campoBusca {
+  width: 100%;
+  min-height: 36px;
+  padding: 0 var(--espaco-3);
+  border: var(--largura-borda) solid var(--cor-borda-forte);
+  border-radius: var(--raio-2);
+  background: var(--superficie-cartao);
+  font-size: var(--texto-sm);
+}
+
+.direita {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  margin-left: auto;
+}
+
+.selo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  padding: var(--espaco-1) var(--espaco-3);
+  border-radius: var(--raio-completo);
+  background: var(--cor-acento-suave);
+  border: var(--largura-borda) solid var(--cor-acento-borda);
+  color: var(--cor-acento-forte);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-medio);
+  white-space: nowrap;
+}
+
+.ideias {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-height: 36px;
+  padding: 0 var(--espaco-4);
+  border-radius: var(--raio-completo);
+  background: var(--cor-marca-forte);
+  color: var(--cor-marca-contraste);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-medio);
+  white-space: nowrap;
+}
+
+.ideias:hover {
+  background: var(--cor-marca-media);
+  text-decoration: none;
+}
+
+.entrar {
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-secundario);
+  white-space: nowrap;
+}
+
+@media (max-width: 1023px) {
+  .busca { display: none; }
+  .selo { display: none; }
+}
+
+@media (max-width: 767px) {
+  .unidade { display: none; }
+  .entrar { display: none; }
+  .ideias { padding: 0 var(--espaco-3); }
+}

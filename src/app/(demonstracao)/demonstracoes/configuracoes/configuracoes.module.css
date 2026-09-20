@@ -1,0 +1,60 @@
+.amostras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: var(--espaco-3);
+}
+
+.amostra {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
+  padding: var(--espaco-3);
+  border: var(--largura-borda) solid var(--cor-borda);
+  border-radius: var(--raio-2);
+  background: var(--superficie-cartao);
+}
+
+.cor {
+  height: 44px;
+  border-radius: var(--raio-1);
+  border: var(--largura-borda) solid var(--cor-borda);
+}
+
+.nomeCor {
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-medio);
+}
+
+.tokenCor {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-secundario);
+  word-break: break-all;
+}
+
+.tabelaArquivos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+}
+
+.arquivo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+  padding-bottom: var(--espaco-3);
+  border-bottom: var(--largura-borda) solid var(--cor-borda);
+}
+
+.caminho {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-sm);
+  color: var(--cor-marca-forte);
+  word-break: break-all;
+}
+
+.paraQue {
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-secundario);
+  line-height: var(--altura-linha-solta);
+}

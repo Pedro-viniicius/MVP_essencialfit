@@ -4,7 +4,8 @@ import type { NextConfig } from "next";
  * Configuracao do Next.js.
  *
  * - `output: "standalone"` gera uma pasta autocontida usada pelo Dockerfile
- *   (Modelos de deploy B e C). Nao afeta o Modelo A.
+ *   (Modelos de deploy B e C). Na Vercel (Modelo A) ele e omitido: a propria
+ *   plataforma empacota as funcoes, e `standalone` atrapalharia esse pipeline.
  * - Os cabecalhos de seguranca sao definidos aqui para valerem em qualquer
  *   hospedagem, sem depender de proxy externo. Ver docs/seguranca/modelo-seguranca.md.
  */
@@ -17,7 +18,7 @@ const cabecalhosSeguranca = [
 ];
 
 const configuracao: NextConfig = {
-  output: "standalone",
+  ...(process.env.VERCEL ? {} : { output: "standalone" as const }),
   poweredByHeader: false,
   reactStrictMode: true,
   async headers() {

@@ -1,0 +1,96 @@
+/*
+ * Tema da marca Essencial Fit.
+ *
+ * Este arquivo REDEFINE tokens de `tokens.css`. Ele e o unico lugar com cor,
+ * raio, sombra e tipografia proprios da marca. Para vestir o mesmo software
+ * com outra identidade, copie este arquivo, troque os valores e ajuste o
+ * `@import` em `estilos/global.css` — nada mais precisa mudar.
+ *
+ * Direcao visual: saudavel, moderno, limpo, energetico, confiavel.
+ * Verde profundo (confianca e saude) + limao (energia) + neutros quentes.
+ * Nada de preto-e-vermelho agressivo de academia.
+ */
+
+:root {
+  /* ---------------------------------------------------------------- *
+   * Marca                                                             *
+   * ---------------------------------------------------------------- */
+  --cor-marca-forte: #0f6b55;
+  --cor-marca-media: #17876c;
+  --cor-marca-suave: #e8f4f0;
+  --cor-marca-borda: #a8d5c6;
+  --cor-marca-contraste: #ffffff;
+  --marca-gradiente: linear-gradient(135deg, #0f6b55 0%, #17876c 55%, #4f9e5f 100%);
+
+  /* Acento: energia e movimento. Em texto usamos a versao escura. */
+  --cor-acento-forte: #5c6f00;
+  --cor-acento-grafico: #a3c614;
+  --cor-acento-suave: #f5f9e4;
+  --cor-acento-borda: #d5e29a;
+
+  /* ---------------------------------------------------------------- *
+   * Superficies — neutros levemente quentes, nunca cinza de escritorio *
+   * ---------------------------------------------------------------- */
+  --superficie-fundo: #f5f8f6;
+  --superficie-cartao: #ffffff;
+  --superficie-elevada: #ffffff;
+  --superficie-afundada: #eef3f0;
+  --superficie-barra: #ffffff;
+  --superficie-realce: #eef6f2;
+
+  --cor-texto-primario: #14201c;
+  --cor-texto-secundario: #4d5c57;
+  --cor-texto-fraco: #64726d;
+  --cor-texto-invertido: #ffffff;
+
+  --cor-borda: #dde6e2;
+  --cor-borda-forte: #6f807a;
+
+  /* ---------------------------------------------------------------- *
+   * Semantica — mantida acessivel; apenas harmonizada com o verde      *
+   * ---------------------------------------------------------------- */
+  --cor-informacao-forte: #0f6b55;
+  --cor-informacao-suave: #e8f4f0;
+  --cor-informacao-borda: #a8d5c6;
+
+  --cor-sucesso-forte: #1a6647;
+  --cor-sucesso-suave: #e4f2eb;
+  --cor-sucesso-borda: #a3cdb9;
+
+  --cor-atencao-forte: #8a5300;
+  --cor-atencao-suave: #fdf3df;
+  --cor-atencao-borda: #e3c68d;
+
+  --cor-perigo-forte: #a32a20;
+  --cor-perigo-suave: #fceae7;
+  --cor-perigo-borda: #e6ada6;
+
+  --cor-valor-positivo: #1a6647;
+  --cor-valor-negativo: #a32a20;
+  --cor-valor-neutro: #14201c;
+
+  /* ---------------------------------------------------------------- *
+   * Forma — cantos mais suaves e sombras mais leves que o tema base    *
+   * ---------------------------------------------------------------- */
+  --raio-1: 6px;
+  --raio-2: 10px;
+  --raio-3: 16px;
+  --raio-cartao: var(--raio-3);
+
+  --sombra-1: 0 1px 2px rgba(20, 32, 28, 0.05);
+  --sombra-2: 0 4px 16px rgba(20, 32, 28, 0.07);
+  --sombra-3: 0 18px 40px rgba(20, 32, 28, 0.14);
+  --sombra-cartao: var(--sombra-1);
+
+  /* ---------------------------------------------------------------- *
+   * Tipografia                                                        *
+   * ---------------------------------------------------------------- */
+  --fonte-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fonte-titulo: var(--fonte-base);
+  --rastreio-titulo: -0.015em;
+
+  /* Foco e selecao seguem a marca. */
+  --cor-foco: #0f6b55;
+  --anel-foco: 0 0 0 3px rgba(15, 107, 85, 0.32);
+  --cor-selecao: #e8f4f0;
+}

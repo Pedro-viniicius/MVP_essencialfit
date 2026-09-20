@@ -8,13 +8,13 @@ import { PONTOS_DE_QUEBRA } from "../tokens/pontos-de-quebra";
 import { BarraInferior } from "./barra-inferior";
 import { CabecalhoAplicacao, type CabecalhoAplicacaoProps } from "./cabecalho-aplicacao";
 import estilos from "./casca-aplicacao.module.css";
-import { NAVEGACAO_APOIO, type GrupoDeNavegacao } from "./mapa-navegacao";
+import { NAVEGACAO_APOIO, type GrupoDeMenu } from "./mapa-navegacao";
 import { NavegacaoLateral } from "./navegacao-lateral";
 
 export interface CascaAplicacaoProps {
   readonly cabecalho: CabecalhoAplicacaoProps;
   /** Grupos ja filtrados pelas permissoes do usuario (`navegacaoVisivel`). */
-  readonly grupos: readonly GrupoDeNavegacao[];
+  readonly grupos: readonly GrupoDeMenu[];
   readonly contadores?: Readonly<Record<string, number>>;
   readonly children: ReactNode;
 }

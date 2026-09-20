@@ -1,0 +1,98 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-5);
+}
+
+.duplo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--espaco-4);
+}
+
+.controle {
+  width: 100%;
+  min-height: var(--alvo-toque-minimo);
+  padding: 0 var(--espaco-3);
+  border: var(--largura-borda) solid var(--cor-borda-forte);
+  border-radius: var(--raio-2);
+  background: var(--superficie-cartao);
+  font-size: var(--texto-md);
+}
+
+.area {
+  width: 100%;
+  min-height: 88px;
+  padding: var(--espaco-3);
+  border: var(--largura-borda) solid var(--cor-borda-forte);
+  border-radius: var(--raio-2);
+  background: var(--superficie-cartao);
+  font-size: var(--texto-md);
+  resize: vertical;
+}
+
+/* O resultado do calculo fica colado nos campos de preco: e ali que a decisao acontece. */
+.resultado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+  padding: var(--espaco-4);
+  border-radius: var(--raio-cartao);
+  background: var(--cor-marca-suave);
+  border: var(--largura-borda) solid var(--cor-marca-borda);
+}
+
+.frase {
+  font-size: var(--texto-md);
+  line-height: var(--altura-linha-solta);
+  color: var(--cor-texto-primario);
+}
+
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+  gap: var(--espaco-3);
+  margin: 0;
+}
+
+.rotuloNumero {
+  font-size: var(--texto-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cor-texto-secundario);
+}
+
+.valorNumero {
+  margin: 2px 0 0;
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-xl);
+  font-weight: var(--peso-forte);
+  font-variant-numeric: tabular-nums;
+  color: var(--cor-marca-forte);
+}
+
+.alerta {
+  font-size: var(--texto-sm);
+  line-height: var(--altura-linha-solta);
+  color: var(--cor-atencao-forte);
+}
+
+.interruptor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  min-height: var(--alvo-toque-minimo);
+  font-size: var(--texto-base);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+}
+
+.ajuda {
+  font-size: var(--texto-sm);
+  color: var(--cor-texto-secundario);
+}

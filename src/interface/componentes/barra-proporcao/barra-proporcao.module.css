@@ -1,0 +1,49 @@
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+  margin: 0;
+}
+
+.linha {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--espaco-1) var(--espaco-3);
+  align-items: baseline;
+}
+
+.rotulo {
+  font-size: var(--texto-base);
+  font-weight: var(--peso-medio);
+}
+
+.valor {
+  font-size: var(--texto-base);
+  font-weight: var(--peso-forte);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.trilho {
+  grid-column: 1 / -1;
+  height: 8px;
+  border-radius: var(--raio-completo);
+  background: var(--superficie-afundada);
+  overflow: hidden;
+}
+
+.preenchimento {
+  height: 100%;
+  border-radius: var(--raio-completo);
+  background: var(--cor-marca-media);
+}
+
+.primeira .preenchimento {
+  background: var(--cor-marca-forte);
+}
+
+.apoio {
+  grid-column: 1 / -1;
+  font-size: var(--texto-xs);
+  color: var(--cor-texto-fraco);
+}

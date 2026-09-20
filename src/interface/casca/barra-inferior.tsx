@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import estilos from "./barra-inferior.module.css";
-import { rotaAtiva, type ItemDeNavegacao } from "./mapa-navegacao";
+import { rotaAtiva, type ItemDeMenu } from "./mapa-navegacao";
 
 export interface BarraInferiorProps {
   /** Ate quatro destinos; a doc de responsividade fixa: Início, Pagar, Receber, Mais. */
-  readonly itens: readonly ItemDeNavegacao[];
+  readonly itens: readonly ItemDeMenu[];
   /** Chamado pelo item "Mais" para abrir o painel deslizante com a navegacao completa. */
   readonly aoAbrirMais: () => void;
 }
@@ -48,7 +48,7 @@ export function BarraInferior({ itens, aoAbrirMais }: BarraInferiorProps) {
 }
 
 /** Rotulos curtos so na barra inferior; no painel completo o nome inteiro volta. */
-function rotuloCurto(item: ItemDeNavegacao): string {
+function rotuloCurto(item: ItemDeMenu): string {
   const curtos: Record<string, string> = {
     "/contas-pagar": "Pagar",
     "/contas-receber": "Receber",

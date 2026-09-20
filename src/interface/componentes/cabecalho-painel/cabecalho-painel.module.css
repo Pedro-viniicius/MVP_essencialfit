@@ -1,0 +1,78 @@
+.painel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+  padding: var(--espaco-5) var(--espaco-6);
+  margin-bottom: var(--espaco-5);
+  border-radius: var(--raio-cartao);
+  background: var(--marca-gradiente);
+  color: var(--cor-marca-contraste);
+  box-shadow: var(--sombra-2);
+}
+
+.etiqueta {
+  font-size: var(--texto-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+
+.pergunta {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-2xl);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--rastreio-titulo);
+  line-height: var(--altura-linha-apertada);
+  color: var(--cor-marca-contraste);
+}
+
+.resposta {
+  max-width: 68ch;
+  font-size: var(--texto-md);
+  line-height: var(--altura-linha-solta);
+  opacity: 0.95;
+}
+
+.rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+  margin-top: var(--espaco-1);
+}
+
+/* Links sobre o fundo da marca precisam do contraste claro, nao do verde. */
+.rodape a {
+  color: var(--cor-marca-contraste);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-medio);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.rodape a:hover {
+  opacity: 0.85;
+}
+
+.rodape a:focus-visible {
+  outline-color: var(--cor-marca-contraste);
+}
+
+.periodo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  padding: var(--espaco-1) var(--espaco-3);
+  border-radius: var(--raio-completo);
+  background: rgba(255, 255, 255, 0.18);
+  font-size: var(--texto-sm);
+}
+
+@media (max-width: 767px) {
+  .painel {
+    padding: var(--espaco-4);
+  }
+  .pergunta {
+    font-size: var(--texto-xl);
+  }
+}

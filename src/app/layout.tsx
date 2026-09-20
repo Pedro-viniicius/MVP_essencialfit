@@ -2,10 +2,11 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import "@/interface/estilos/global.css";
+import { MARCA } from "@/interface/marca/indice";
 
 export const metadata: Metadata = {
-  title: { default: "Financeiro", template: "%s · Financeiro" },
-  description: "Gestao financeira para pequenas e medias empresas.",
+  title: { default: MARCA.nome, template: `%s · ${MARCA.nome}` },
+  description: MARCA.descricao,
 };
 
 export const viewport: Viewport = {

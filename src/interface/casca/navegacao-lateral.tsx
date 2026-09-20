@@ -6,15 +6,15 @@ import { usePathname } from "next/navigation";
 import {
   NAVEGACAO_APOIO,
   rotaAtiva,
-  type GrupoDeNavegacao,
-  type ItemDeNavegacao,
+  type GrupoDeMenu,
+  type ItemDeMenu,
 } from "./mapa-navegacao";
 import estilos from "./navegacao-lateral.module.css";
 
 export interface NavegacaoLateralProps {
   /** Grupos ja filtrados pelas permissoes do usuario. */
-  readonly grupos: readonly GrupoDeNavegacao[];
-  readonly itensDeApoio?: readonly ItemDeNavegacao[];
+  readonly grupos: readonly GrupoDeMenu[];
+  readonly itensDeApoio?: readonly ItemDeMenu[];
   /** Contadores por rota. Apenas duas rotas exibem contador (ver mapa-navegacao). */
   readonly contadores?: Readonly<Record<string, number>>;
   /**
@@ -52,7 +52,7 @@ export function NavegacaoLateral({
               <LinhaDeNavegacao
                 key={item.rota}
                 item={item}
-                ativo={rotaAtiva(rotaAtual, item.rota)}
+                ativo={rotaAtiva(rotaAtual, item.rota, item.exata)}
                 {...(contadores[item.rota] !== undefined ? { contador: contadores[item.rota] } : {})}
               />
             ))}
@@ -63,7 +63,7 @@ export function NavegacaoLateral({
       <div className={estilos.apoio}>
         <ul>
           {itensDeApoio.map((item) => (
-            <LinhaDeNavegacao key={item.rota} item={item} ativo={rotaAtiva(rotaAtual, item.rota)} />
+            <LinhaDeNavegacao key={item.rota} item={item} ativo={rotaAtiva(rotaAtual, item.rota, item.exata)} />
           ))}
         </ul>
       </div>
@@ -76,7 +76,7 @@ function LinhaDeNavegacao({
   ativo,
   contador,
 }: {
-  readonly item: ItemDeNavegacao;
+  readonly item: ItemDeMenu;
   readonly ativo: boolean;
   readonly contador?: number;
 }) {
@@ -89,6 +89,10 @@ function LinhaDeNavegacao({
         {...(ativo ? { "aria-current": "page" as const } : {})}
       >
         <span className={estilos.rotulo}>{item.rotulo}</span>
+        {/* Na barra compacta (tablet) o rotulo e escondido; a sigla ocupa o lugar. */}
+        <span className={estilos.sigla} aria-hidden="true">
+          {item.sigla ?? item.rotulo.slice(0, 2)}
+        </span>
         {item.aceitaContador === true && contador !== undefined && contador > 0 ? (
           <span className={estilos.contador}>
             {contador}

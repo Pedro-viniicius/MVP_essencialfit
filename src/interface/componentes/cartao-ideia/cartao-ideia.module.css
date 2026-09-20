@@ -1,0 +1,102 @@
+.cartao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+  height: 100%;
+  padding: var(--espaco-5);
+  background: var(--superficie-cartao);
+  border: var(--largura-borda) solid var(--cor-borda);
+  border-radius: var(--raio-cartao);
+  box-shadow: var(--sombra-cartao);
+}
+
+.topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+}
+
+.titulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-lg);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--rastreio-titulo);
+  line-height: var(--altura-linha-apertada);
+}
+
+.etiqueta {
+  flex: none;
+  padding: 2px var(--espaco-2);
+  border-radius: var(--raio-completo);
+  background: var(--cor-acento-suave);
+  border: var(--largura-borda) solid var(--cor-acento-borda);
+  color: var(--cor-acento-forte);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-medio);
+  white-space: nowrap;
+}
+
+.camadas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+  margin: 0;
+}
+
+.rotulo {
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--cor-marca-forte);
+}
+
+.texto {
+  margin: 2px 0 0;
+  font-size: var(--texto-base);
+  line-height: var(--altura-linha-solta);
+  color: var(--cor-texto-primario);
+}
+
+.porque {
+  margin-top: auto;
+  border-top: var(--largura-borda) dashed var(--cor-borda);
+  padding-top: var(--espaco-3);
+}
+
+.resumoPorque {
+  cursor: pointer;
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-medio);
+  color: var(--cor-marca-forte);
+  list-style: none;
+}
+
+.resumoPorque::-webkit-details-marker {
+  display: none;
+}
+
+.resumoPorque::after {
+  content: " ↓";
+}
+
+.porque[open] .resumoPorque::after {
+  content: " ↑";
+}
+
+.explicacao {
+  margin-top: var(--espaco-2);
+  padding: var(--espaco-3);
+  border-radius: var(--raio-2);
+  background: var(--superficie-realce);
+  font-size: var(--texto-sm);
+  line-height: var(--altura-linha-solta);
+  color: var(--cor-texto-secundario);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}

@@ -12,6 +12,9 @@ out/
 .env.producao
 .env.homologacao
 
+# Vinculo local com o projeto da Vercel
+.vercel/
+
 # Backups locais do banco
 backups/
 

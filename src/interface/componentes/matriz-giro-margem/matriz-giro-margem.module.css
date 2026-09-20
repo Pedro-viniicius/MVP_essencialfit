@@ -1,0 +1,100 @@
+.figura {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-4);
+}
+
+.quadro {
+  /* Os tamanhos de texto do SVG sao dados em unidades do viewBox: sem um teto
+   * de largura, o grafico esticado agiganta os rotulos. */
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  overflow: visible;
+}
+
+.fundoQuadrante {
+  fill: var(--superficie-afundada);
+}
+
+.fundoBom {
+  fill: var(--cor-sucesso-suave);
+}
+
+.fundoAtencao {
+  fill: var(--cor-atencao-suave);
+}
+
+.eixo {
+  stroke: var(--cor-borda-forte);
+  stroke-width: 1;
+}
+
+.divisao {
+  stroke: var(--cor-borda);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.nomeQuadrante {
+  fill: var(--cor-texto-fraco);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.rotuloEixo {
+  fill: var(--cor-texto-secundario);
+  font-size: 11px;
+}
+
+.ponto {
+  fill: var(--cor-marca-forte);
+  stroke: var(--superficie-cartao);
+  stroke-width: 2;
+}
+
+.numeroPonto {
+  fill: var(--cor-marca-contraste);
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.legenda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
+  margin: 0;
+}
+
+.itemLegenda {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-3);
+  font-size: var(--texto-sm);
+}
+
+.numero {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--raio-completo);
+  background: var(--cor-marca-forte);
+  color: var(--cor-marca-contraste);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-forte);
+}
+
+.nomeLegenda {
+  font-weight: var(--peso-medio);
+}
+
+.leituraLegenda {
+  color: var(--cor-texto-secundario);
+}

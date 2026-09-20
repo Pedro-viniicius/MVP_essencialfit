@@ -16,6 +16,15 @@
   flex-direction: column;
 }
 
+/*
+ * `display: flex` acima sobrepoe a regra do navegador `dialog:not([open])
+ * { display: none }`. Sem esta linha, a gaveta fechada continua desenhada na
+ * tela — o painel de navegacao do celular apareceria fixo no desktop.
+ */
+.gaveta:not([open]) {
+  display: none;
+}
+
 .gaveta::backdrop {
   background: var(--cor-sobreposicao);
 }

@@ -45,6 +45,12 @@ pnpm dev                             # http://localhost:3000
 pnpm tarefas:executar                # em outro terminal: processo de tarefas
 ```
 
+Demonstracao: `http://localhost:3000/demonstracoes` abre a area de
+apresentacao (formularios, paineis e Ideias IA com dados de exemplo). Ela nao
+exige sessao, banco de dados nem `.env` — ver
+[`src/app/(demonstracao)/LEIA-ME.md`](src/app/(demonstracao)/LEIA-ME.md).
+A identidade visual fica em [`src/interface/marca/`](src/interface/marca/LEIA-ME.md).
+
 Primeiro uso: `http://localhost:3000` leva a `/entrar` → "Criar a primeira
 conta" (`/criar-conta`) → `/primeiro-acesso` (cadastra a empresa; voce vira
 administrador) → `/inicio`. Fluxo completo em
@@ -61,9 +67,10 @@ pnpm verificar:tudo    # lint + tipos + arquitetura + testes + licencas + build
 ```
 src/
   app/            rotas e telas (Next.js); (publico)/ entrar e criar conta,
-                  (autenticado)/ primeiro acesso, (aplicacao)/ tudo dentro da casca
+                  (autenticado)/ primeiro acesso, (aplicacao)/ tudo dentro da casca,
+                  (demonstracao)/ area de apresentacao com dados de exemplo
   proxy.ts        repassa a rota pedida em cabecalho; nao decide acesso
-  interface/      sistema de design: tokens, componentes, formatacao, casca
+  interface/      sistema de design: tokens, marca, componentes, formatacao, casca
   composicao/     escolha de provedores concretos
   modulos/        modulos de negocio (contas-pagar, bancos, dre, orcamento...)
   nucleo/         autenticacao, autorizacao, auditoria, empresas, eventos, tarefas...

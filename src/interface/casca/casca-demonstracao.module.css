@@ -1,0 +1,37 @@
+.casca {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--superficie-fundo);
+}
+
+.corpo {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.conteudo {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  max-width: var(--largura-maxima-conteudo);
+  margin: 0 auto;
+  padding: var(--espaco-5) var(--espaco-6);
+}
+
+.conteudo:focus {
+  outline: none;
+}
+
+@media (max-width: 1023px) {
+  .conteudo {
+    padding: var(--espaco-4) var(--espaco-5);
+  }
+}
+
+@media (max-width: 767px) {
+  .conteudo {
+    padding: var(--espaco-4) var(--espaco-4) calc(var(--espaco-8) + env(safe-area-inset-bottom));
+  }
+}

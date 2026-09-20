@@ -4,6 +4,12 @@
  */
 
 @import "../tokens/tokens.css";
+/*
+ * Tema da marca. Sempre DEPOIS dos tokens: ele redefine o que for proprio da
+ * identidade (cor, raio, sombra, tipografia). Trocar de marca = trocar esta
+ * unica linha e o arquivo correspondente em `src/interface/marca/`.
+ */
+@import "../marca/tema-essencial-fit.css";
 
 *,
 *::before,
@@ -32,7 +38,11 @@ h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
 h1 { font-size: var(--texto-xl); line-height: var(--altura-linha-apertada); }
 h2 { font-size: var(--texto-lg); line-height: var(--altura-linha-apertada); }
 h3 { font-size: var(--texto-md); line-height: var(--altura-linha-apertada); }
-h1, h2, h3 { font-weight: var(--peso-forte); }
+h1, h2, h3 {
+  font-weight: var(--peso-forte);
+  font-family: var(--fonte-titulo);
+  letter-spacing: var(--rastreio-titulo);
+}
 
 ul, ol {
   margin: 0;

@@ -1,0 +1,85 @@
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+
+.filtro {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 var(--espaco-4);
+  border: var(--largura-borda) solid var(--cor-borda);
+  border-radius: var(--raio-completo);
+  background: var(--superficie-cartao);
+  color: var(--cor-texto-primario);
+  font-size: var(--texto-sm);
+}
+
+.filtro:hover {
+  background: var(--superficie-realce);
+  text-decoration: none;
+}
+
+.filtroAtivo {
+  background: var(--cor-marca-forte);
+  border-color: var(--cor-marca-forte);
+  color: var(--cor-marca-contraste);
+  font-weight: var(--peso-medio);
+}
+
+.filtroAtivo:hover {
+  background: var(--cor-marca-media);
+}
+
+.honestidade {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
+  padding: var(--espaco-4);
+  border-radius: var(--raio-cartao);
+  background: var(--superficie-afundada);
+  border: var(--largura-borda) solid var(--cor-borda);
+}
+
+.tituloHonestidade {
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-forte);
+}
+
+.textoHonestidade {
+  font-size: var(--texto-sm);
+  line-height: var(--altura-linha-solta);
+  color: var(--cor-texto-secundario);
+  max-width: 78ch;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+  gap: var(--espaco-4);
+  align-items: stretch;
+}
+
+/*
+ * A acao de um cartao de ideia NAVEGA — entao ela e um link, nao um <button>.
+ * Botao dentro de link e HTML invalido e confunde leitores de tela; aqui o
+ * link apenas veste a aparencia do botao primario.
+ */
+.acaoLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 var(--espaco-4);
+  border-radius: var(--raio-2);
+  background: var(--cor-marca-forte);
+  color: var(--cor-marca-contraste);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-medio);
+}
+
+.acaoLink:hover {
+  background: var(--cor-marca-media);
+  text-decoration: none;
+}

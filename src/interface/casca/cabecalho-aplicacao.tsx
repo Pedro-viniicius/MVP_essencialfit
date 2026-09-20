@@ -1,5 +1,6 @@
 "use client";
 
+import { Logotipo } from "../marca/logotipo";
 import estilos from "./cabecalho-aplicacao.module.css";
 
 export interface EmpresaDoCabecalho {
@@ -44,7 +45,9 @@ export function CabecalhoAplicacao({
 
   return (
     <header className={estilos.cabecalho}>
-      <span className={estilos.marca}>Financeiro</span>
+      <span className={estilos.marca}>
+        <Logotipo tamanho="pequeno" />
+      </span>
 
       {podeTrocar ? (
         <form action={aoTrocarEmpresa} className={estilos.empresa}>
