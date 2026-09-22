@@ -89,3 +89,25 @@ Ao reiniciar, tudo volta ao estado inicial.
 Num deploy na Vercel o modo de teste já fica desligado sozinho, mesmo com
 `PADRAO = true`: a variável `VERCEL` denuncia o ambiente e o painel nunca sobe
 sem senha por descuido.
+
+## Publicar como vitrine na Vercel
+
+Para o site no ar mostrar a interface sem banco nenhum, defina **`USAR_MOCKS=true`**
+nas variáveis do projeto na Vercel. Essa escolha explícita vence a proteção acima,
+e o `vercel-build` (`scripts/vercel-build.sh`) pula a migração — sem ela, o build
+falharia na hora de migrar um banco que não existe.
+
+Três coisas para saber antes:
+
+- **O `/admin` fica aberto.** Sem senha e sem autenticador, para qualquer pessoa
+  com o endereço. Os dados são fictícios e o `/admin` em si é um estado vazio,
+  mas o endereço é público.
+- **O que for cadastrado no ar não persiste.** Cada instância da função tem a sua
+  própria memória: um cadastro feito numa requisição pode não aparecer na
+  seguinte, e some a cada instância reciclada. Serve para demonstrar as telas,
+  não para receber cadastro de verdade.
+- **Os números do `/demo` são sempre os mesmos.** É a semente fixa: 218 cadastros,
+  o mesmo pico, o mesmo líder. Bom para apresentar, inútil como relatório.
+
+Para voltar a publicar de verdade, remova `USAR_MOCKS` das variáveis da Vercel.
+O build passa a migrar e a compilar como antes, sem mais nenhuma mudança.
