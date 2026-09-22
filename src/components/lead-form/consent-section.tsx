@@ -16,9 +16,9 @@ const ORDEM: Finalidade[] = ["contato_comercial", "promocao", "marketing"];
 export function ConsentSection({ error, onRequiredChange }: Props) {
   return (
     <fieldset className="space-y-3">
-      <legend className="text-base font-medium">{M.form.consentimentos}</legend>
+      <legend className="text-xs font-semibold tracking-[0.14em] text-acento uppercase">{M.form.consentimentos}</legend>
 
-      <div className="space-y-1 rounded-lg bg-muted p-3 text-sm leading-snug text-muted-foreground">
+      <div className="space-y-1 rounded-lg bg-superficie p-3 text-sm leading-snug text-muted-foreground">
         {M.form.privacidadeResumo.map((linha) => (
           <p key={linha}>{linha}</p>
         ))}
@@ -26,7 +26,7 @@ export function ConsentSection({ error, onRequiredChange }: Props) {
           href="/privacidade"
           target="_blank"
           rel="noopener"
-          className="inline-block min-h-11 py-2 font-medium text-foreground underline underline-offset-4"
+          className="inline-block min-h-11 py-2 font-medium text-acento underline underline-offset-4"
         >
           {M.form.verPolitica}
         </a>

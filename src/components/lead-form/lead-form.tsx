@@ -13,6 +13,7 @@ import { mascararTelefone } from "@/lib/validation/phone";
 import { Chips } from "./chips";
 import { ConsentSection } from "./consent-section";
 import { Field } from "./field";
+import { Grupo } from "./grupo";
 import { enviarLead } from "./submit";
 
 export type EventoPublico = {
@@ -168,9 +169,9 @@ export function LeadForm({ evento }: { evento: EventoPublico }) {
   const bloqueado = !hidratado || enviando;
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="space-y-6">
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="space-y-8">
       {modoManual && (
-        <div className="rounded-lg border border-border bg-muted p-3 text-sm">
+        <div className="rounded-lg border border-border bg-superficie p-3 text-sm">
           <p>{M.manual.aviso}</p>
           {ultimoCupom && (
             <p role="status" className="mt-1 font-semibold">
@@ -181,7 +182,7 @@ export function LeadForm({ evento }: { evento: EventoPublico }) {
       )}
 
       {cupomExistente !== null && (
-        <div role="status" className="rounded-lg border border-border bg-muted p-3 text-sm">
+        <div role="status" className="anim-surgir rounded-lg border border-acento/30 bg-acento-suave p-3 text-sm">
           <p>{M.erros.telefoneDuplicado}</p>
           {cupomExistente && (
             <p className="mt-1 font-semibold">
@@ -192,61 +193,68 @@ export function LeadForm({ evento }: { evento: EventoPublico }) {
         </div>
       )}
 
-      <Field id="nome" label={M.form.nome} error={erros.nome}>
-        <Input
-          id="nome"
-          name="nome"
-          onBlur={validarNoBlur("nome")}
-          autoFocus
-          autoComplete="name"
-          autoCapitalize="words"
-          enterKeyHint="next"
-          placeholder={M.form.nomePlaceholder}
-          required
-          aria-invalid={!!erros.nome}
-          aria-describedby={erros.nome ? "nome-erro" : undefined}
-        />
-      </Field>
+      {/* O toque vem antes do teclado: duas perguntas de um toque abrem o
+          formulário, e só então pedimos nome e contato. */}
+      <Grupo titulo={M.form.grupos.interesse} ajuda={M.form.grupos.interesseAjuda}>
+        <Chips label={M.form.modelo} name="modelo" options={modelos} />
+        <Chips label={M.form.prazo} name="prazo" options={M.prazos} />
+      </Grupo>
 
-      <Field id="telefone" label={M.form.whatsapp} error={erros.telefone}>
-        <Input
-          id="telefone"
-          name="telefone"
-          type="tel"
-          inputMode="tel"
-          // Mask applied straight on the DOM so the input stays uncontrolled.
-          onChange={(e) => {
-            e.target.value = mascararTelefone(e.target.value);
-          }}
-          onBlur={validarNoBlur("telefone")}
-          autoComplete="tel-national"
-          enterKeyHint="next"
-          placeholder={M.form.whatsappPlaceholder}
-          required
-          aria-invalid={!!erros.telefone}
-          aria-describedby={erros.telefone ? "telefone-erro" : undefined}
-        />
-      </Field>
+      <Grupo titulo={M.form.grupos.contato} ajuda={M.form.grupos.contatoAjuda}>
+        <Field id="nome" label={M.form.nome} error={erros.nome}>
+          <Input
+            id="nome"
+            name="nome"
+            onBlur={validarNoBlur("nome")}
+            // Só no modo atendimento: no celular de quem chegou pelo cartão, o
+            // teclado subindo sozinho esconde a primeira pergunta.
+            autoFocus={modoManual}
+            autoComplete="name"
+            autoCapitalize="words"
+            enterKeyHint="next"
+            placeholder={M.form.nomePlaceholder}
+            required
+            aria-invalid={!!erros.nome}
+            aria-describedby={erros.nome ? "nome-erro" : undefined}
+          />
+        </Field>
 
-      <Field id="email" label={M.form.email} hint={M.form.emailOpcional} error={erros.email}>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          inputMode="email"
-          onBlur={validarNoBlur("email")}
-          autoComplete="email"
-          autoCapitalize="none"
-          enterKeyHint="done"
-          placeholder={M.form.emailPlaceholder}
-          aria-invalid={!!erros.email}
-          aria-describedby={erros.email ? "email-erro" : undefined}
-        />
-      </Field>
+        <Field id="telefone" label={M.form.whatsapp} error={erros.telefone}>
+          <Input
+            id="telefone"
+            name="telefone"
+            type="tel"
+            inputMode="tel"
+            // Mask applied straight on the DOM so the input stays uncontrolled.
+            onChange={(e) => {
+              e.target.value = mascararTelefone(e.target.value);
+            }}
+            onBlur={validarNoBlur("telefone")}
+            autoComplete="tel-national"
+            enterKeyHint="next"
+            placeholder={M.form.whatsappPlaceholder}
+            required
+            aria-invalid={!!erros.telefone}
+            aria-describedby={erros.telefone ? "telefone-erro" : undefined}
+          />
+        </Field>
 
-      <Chips label={M.form.modelo} name="modelo" options={modelos} />
-
-      <Chips label={M.form.prazo} name="prazo" options={M.prazos} />
+        <Field id="email" label={M.form.email} hint={M.form.emailOpcional} error={erros.email}>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            inputMode="email"
+            onBlur={validarNoBlur("email")}
+            autoComplete="email"
+            autoCapitalize="none"
+            enterKeyHint="done"
+            placeholder={M.form.emailPlaceholder}
+            aria-invalid={!!erros.email}
+            aria-describedby={erros.email ? "email-erro" : undefined}
+          />
+        </Field>
+      </Grupo>
 
       <ConsentSection
         error={erros.consentimentos}

@@ -43,6 +43,22 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /* Cor com significado: sucesso, atenção e perigo valem nos dois temas. */
+  --color-sucesso: var(--sucesso);
+  --color-sucesso-suave: var(--sucesso-suave);
+  --color-atencao: var(--atencao);
+  --color-atencao-suave: var(--atencao-suave);
+  --color-perigo: var(--perigo);
+  --color-perigo-suave: var(--perigo-suave);
+  --color-destaque: var(--destaque);
+  /* Site institucional (landing): um acento, base neutra. */
+  --color-acento: var(--acento);
+  --color-acento-forte: var(--acento-forte);
+  --color-acento-suave: var(--acento-suave);
+  --color-tinta: var(--tinta);
+  --color-tinta-suave: var(--tinta-suave);
+  --color-superficie: var(--superficie);
+  --color-linha: var(--linha);
 }
 
 :root {
@@ -78,6 +94,23 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  /* Essencial Fit: verde profundo para confiança e saúde, lima controlado
+     para energia e neutros quentes para evitar a aparência de academia. */
+  --acento: oklch(0.48 0.105 162);
+  --acento-forte: oklch(0.39 0.09 162);
+  --acento-suave: oklch(0.96 0.035 155);
+  --tinta: oklch(0.25 0.045 165);
+  --tinta-suave: oklch(0.48 0.035 165);
+  --superficie: oklch(0.98 0.012 145);
+  --linha: oklch(0.89 0.025 155);
+  /* Significado antes de estética: verde confirma, âmbar alerta, vermelho impede. */
+  --sucesso: oklch(0.48 0.105 162);
+  --sucesso-suave: oklch(0.96 0.035 155);
+  --atencao: oklch(0.52 0.12 75);
+  --atencao-suave: oklch(0.96 0.05 85);
+  --perigo: oklch(0.52 0.19 27);
+  --perigo-suave: oklch(0.96 0.035 27);
+  --destaque: var(--acento);
 }
 
 .dark {
@@ -128,19 +161,110 @@
     @apply font-sans;
   }
 }
-/* Admin + demo: pitch-deck palette. Near-black ground, white type, one red. */
+/* Painel Essencial Fit: contraste alto, verde profundo e acento energético.
+   Texto secundário usa --muted-foreground (8,8:1 sobre o cartão). Branco
+   transparente não serve: a 40% fica em 3,2:1 e reprova no WCAG AA. */
 .painel {
-  --background: oklch(0.13 0 0);
+  --background: oklch(0.19 0.045 165);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.18 0 0);
+  --card: oklch(0.24 0.048 165);
   --card-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.22 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --border: oklch(1 0 0 / 12%);
+  --muted: oklch(0.29 0.045 165);
+  --muted-foreground: oklch(0.8 0.028 155);
+  --border: oklch(1 0 0 / 14%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.6 0 0);
-  --destaque: #e4002b;
+  --ring: oklch(0.76 0.15 112);
+  /* Botão padrão do painel: claro sobre fundo escuro. */
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.21 0.05 165);
+  --destaque: oklch(0.85 0.17 112);
+  --sucesso: oklch(0.82 0.15 145);
+  --sucesso-suave: oklch(0.82 0.15 145 / 14%);
+  --atencao: oklch(0.85 0.13 85);
+  --atencao-suave: oklch(0.85 0.13 85 / 14%);
+  --perigo: oklch(0.75 0.16 25);
+  --perigo-suave: oklch(0.75 0.16 25 / 14%);
+  --destructive: oklch(0.75 0.16 25);
   background: var(--background);
   color: var(--foreground);
-  font-family: Calibri, "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---- Experiência Essencial Fit ----------------------------------
+   `.site` é a landing; `.captura` são as telas públicas do cartão
+   (formulário, cupom, privacidade). Mesma paleta, mesma tipografia. */
+.site,
+.captura {
+  --foreground: var(--tinta);
+  --muted-foreground: var(--tinta-suave);
+  --border: var(--linha);
+  --input: var(--linha);
+  --ring: var(--acento);
+  --primary: var(--acento);
+  --primary-foreground: oklch(0.99 0 0);
+  color: var(--foreground);
+}
+.site {
+  scroll-behavior: smooth;
+}
+.site :target {
+  scroll-margin-top: 5rem;
+}
+
+/* Animações explicam a interação; nenhuma é decorativa. */
+@keyframes site-pulso-nfc {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes site-surgir {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes site-barra {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes site-varredura {
+  0% { top: 8%; }
+  100% { top: 88%; }
+}
+.site .anim-pulso-nfc { animation: site-pulso-nfc 1.6s ease-out infinite; }
+/* Entrada curta de conteúdo que aparece depois de uma ação. Global: a mesma
+   transição confirma um envio na landing, na captura e no painel. */
+.anim-surgir { animation: site-surgir 0.35s ease-out both; }
+.site .anim-barra { animation: site-barra 0.6s ease-out both; transform-origin: bottom; }
+.site .anim-varredura { animation: site-varredura 1.4s ease-in-out infinite alternate; }
+
+/* Malha cartográfica sutil: coordenadas, não decoração. */
+.site .malha {
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--tinta) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--tinta) 6%, transparent) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+.site .malha-clara {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+/* Agulha: gira até se orientar; a transição é a própria mensagem. */
+.site .agulha { transition: transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1); transform-origin: 50% 50%; }
+@keyframes site-sinal {
+  0% { transform: scale(0.4); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.site .anim-sinal { animation: site-sinal 2.4s ease-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-surgir {
+    animation: none !important;
+  }
+  .site,
+  .site *,
+  .captura,
+  .captura * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto;
+  }
 }

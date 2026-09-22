@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { A } from "@/lib/texts/admin";
 import { revelarAction, type Revelado } from "./actions";
 
@@ -19,19 +20,21 @@ export function LinhaContato({ id, nome, telefone, email }: Props) {
   const v = revelado ?? { nome, telefone, email };
 
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-      <div className="min-w-0">
+    <div className="flex items-start justify-between gap-3">
+      <div className="min-w-0 flex-1">
         <p className="truncate text-base font-semibold sm:text-lg">{v.nome}</p>
-        <p className="truncate text-sm text-white/70 tabular-nums sm:text-base">
+        <p className="truncate text-sm text-muted-foreground tabular-nums sm:text-base">
           {v.telefone}
-          {v.email && <span className="text-white/50"> · {v.email}</span>}
+          {v.email && <span> · {v.email}</span>}
         </p>
       </div>
       {revelado ? (
-        <span className="text-xs font-medium tracking-wide text-white/40 uppercase">{T.revelado}</span>
+        <span className="shrink-0 text-xs font-medium tracking-wide text-muted-foreground uppercase">{T.revelado}</span>
       ) : (
-        <button
-          type="button"
+        <Button
+          variant="outline"
+          size="sm"
+          className="shrink-0"
           disabled={pendente}
           onClick={() =>
             iniciar(async () => {
@@ -42,10 +45,9 @@ export function LinhaContato({ id, nome, telefone, email }: Props) {
               }
             })
           }
-          className="min-h-11 rounded-lg border border-white/20 px-3 text-sm font-medium text-white hover:bg-white/10 disabled:opacity-50"
         >
           {pendente ? T.revelando : T.revelar}
-        </button>
+        </Button>
       )}
     </div>
   );

@@ -25,25 +25,25 @@ import { M } from "../src/lib/texts/messages";
 const DIA = "2026-08-29"; // a Saturday, about two weeks before the pitch
 const EVENTO = {
   slug: DEMO_SLUG,
-  nome: "Evento demonstração",
+  nome: "Essencial Fit · dados de demonstração",
   inicio: new Date(`${DIA}T09:00:00-03:00`),
   fim: new Date(`${DIA}T19:00:00-03:00`),
   ativo: false,
   politicaVersao: POLITICA_VERSAO,
   retencaoMeses: 12,
-  modelos: ["Strada", "Toro", "Pulse", "Fastback", "Argo", "Mobi"],
+  modelos: ["Creatina", "Whey Protein", "Vitaminas e saúde", "Snacks saudáveis", "Acessórios", "Quero orientação"],
 };
 
 // Clearly different performance: a leader, a pack, a tail.
 const VENDEDORES = [
-  { codigo: "D01", nome: "Camila Ferraz", peso: 30 },
-  { codigo: "D02", nome: "Rodrigo Tavares", peso: 22 },
-  { codigo: "D03", nome: "Juliana Prado", peso: 42 },
-  { codigo: "D04", nome: "Everton Sales", peso: 14 },
-  { codigo: "D05", nome: "Marcos Antunes", peso: 34 },
-  { codigo: "D06", nome: "Patrícia Lemos", peso: 10 },
-  { codigo: "D07", nome: "Thiago Bastos", peso: 26 },
-  { codigo: "D08", nome: "Renata Cordeiro", peso: 18 },
+  { codigo: "D01", nome: "Balcão principal", peso: 30 },
+  { codigo: "D02", nome: "Área de suplementos", peso: 22 },
+  { codigo: "D03", nome: "Cartão do sorteio", peso: 42 },
+  { codigo: "D04", nome: "Espaço de bem-estar", peso: 14 },
+  { codigo: "D05", nome: "Caixa", peso: 34 },
+  { codigo: "D06", nome: "Academia parceira", peso: 10 },
+  { codigo: "D07", nome: "Evento local", peso: 26 },
+  { codigo: "D08", nome: "QR da vitrine", peso: 18 },
 ];
 
 // Leads per hour: slow morning, peak 14h–17h, tail at closing (~220 total).
@@ -52,11 +52,11 @@ const POR_HORA: Record<number, number> = {
 };
 
 const MODELOS = pesos([
-  ["Strada", 30], ["Argo", 24], ["Pulse", 15], ["Toro", 12], ["Mobi", 10], ["Fastback", 5],
+  ["Creatina", 30], ["Whey Protein", 24], ["Vitaminas e saúde", 15], ["Snacks saudáveis", 12], ["Acessórios", 10], ["Quero orientação", 5],
   [M.form.naoSei, 3], [null, 1],
 ]);
 const PRAZOS = pesos([
-  ["Só pesquisando", 45], ["Em até 6 meses", 20], ["Em até 3 meses", 17], ["Este mês", 13], [null, 5],
+  ["Só quero conhecer", 45], ["Mais adiante", 20], ["Nos próximos 30 dias", 17], ["Hoje", 13], [null, 5],
 ]);
 const ORIGENS = pesos([["nfc", 55], ["qr", 30], ["manual", 12], ["direto", 3]] as const);
 const DDDS = [16, 19, 11, 17, 14, 15, 18, 31, 34, 41];

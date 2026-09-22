@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { Container, EstadoVazio } from "@/components/painel/primitivos";
+import { Topo } from "@/components/painel/topo";
+import { buttonVariants } from "@/components/ui/button";
 import { exigirAdmin } from "@/lib/admin/session";
 import { A } from "@/lib/texts/admin";
-import { sairAction } from "./login/actions";
 
 export const dynamic = "force-dynamic";
 
@@ -9,20 +11,21 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage() {
   await exigirAdmin("/admin");
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-6 px-5 py-10">
-      <h1 className="text-3xl font-bold tracking-tight text-white">{A.painel.titulo}</h1>
-      <p className="text-white/60">{A.painel.emBreve}</p>
-      <Link
-        href="/demo"
-        className="flex min-h-14 items-center justify-center rounded-lg bg-white text-lg font-semibold text-black hover:bg-white/90"
-      >
-        {A.painel.demo}
-      </Link>
-      <form action={sairAction}>
-        <button type="submit" className="min-h-11 text-sm text-white/50 underline underline-offset-4">
-          {A.sair}
-        </button>
-      </form>
-    </main>
+    <>
+      <Topo atual="painel" />
+      <main id="conteudo" className="flex-1 py-8 sm:py-12">
+        <Container className="max-w-3xl">
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{A.painel.titulo}</h1>
+          <p className="mt-1 text-muted-foreground">{A.painel.subtitulo}</p>
+          <div className="mt-8">
+            <EstadoVazio titulo={A.painel.vazio.titulo} descricao={A.painel.vazio.descricao}>
+              <Link href="/demo" className={buttonVariants({ size: "lg" })}>
+                {A.painel.demo}
+              </Link>
+            </EstadoVazio>
+          </div>
+        </Container>
+      </main>
+    </>
   );
 }

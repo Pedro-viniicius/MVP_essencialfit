@@ -1,9 +1,46 @@
-# Fiat Day — captura de leads
+# Essencial Fit — experiência NFC + QR Code
 
-Formulário de cadastro para o evento de 19/09/2026. Visitante encosta o cartão NFC
-ou lê o QR, preenche uma tela e recebe um cupom.
+Experiência física → digital da Essencial Fit: cartões NFC + QR Code, coleta
+estruturada, painel e leitura dos sinais deixados pelas pessoas. Este repositório
+reúne a apresentação (`/`) e a captura pública (`/f/essencial-fit`).
 
-Site: https://fiat-mvp-pi.vercel.app
+## Rodar só para ver as telas
+
+```bash
+pnpm install && pnpm dev   # http://localhost:3000
+```
+
+Sem `.env`, sem banco, sem serviço externo: o modo de teste atende tudo com
+dados fictícios em memória e o `/admin/login` ganha um botão de entrada direta.
+Como desligar e o que configurar para valer: [MOCKS.md](MOCKS.md).
+
+## Landing (`/`)
+
+Página única, estática, em pt-BR: hero com demonstração animada (toque →
+página → resposta → registro → indicador), seletor "Um cartão. Infinitas
+funções.", fluxo físico → dado → decisão, aplicações, personalização, painel
+de exemplo (dados ilustrativos, sinalizados), IA como camada de interpretação,
+privacidade/LGPD, preço inicial, FAQ e formulário de contato.
+
+- Copy e dados de exemplo: `src/lib/site/conteudo.ts` (um arquivo, revisável de uma vez).
+- Componentes: `src/components/site/`. Só três são client components (demonstração
+  do hero, seletor de funções, menu de celular) mais o formulário de contato.
+- Tokens visuais e animações: `src/app/globals.css`, escopo `.site` (verde profundo,
+  acento energético e neutros quentes; `prefers-reduced-motion` desliga tudo).
+- Formulário de contato: server action em `src/components/site/contato/actions.ts`,
+  grava em `solicitacoes_contato` (migração `drizzle/0002`), 3 envios/hora por IP
+  (hash), campo-isca contra robôs, texto de consentimento versionado. A página
+  renderiza sem banco; só o envio precisa de `DATABASE_URL`.
+- SEO: `robots index` apenas na landing (o restante segue `noindex`), canonical e
+  OpenGraph a partir de `NEXT_PUBLIC_SITE_URL`, imagem em `src/app/opengraph-image.tsx`,
+  FAQ em JSON-LD.
+
+## Essencial Fit — captura pública (`/f/essencial-fit`)
+
+Formulário curto da Essencial Fit. A pessoa encosta o celular no cartão NFC ou lê
+o QR Code, responde sobre seu interesse e recebe a confirmação da participação.
+
+Site configurado por `NEXT_PUBLIC_SITE_URL`.
 
 > README completo (rodar local, seed, vendedores, exportação, plano de contingência)
 > chega na etapa de hardening. Esta seção já é definitiva.
@@ -16,7 +53,7 @@ Cada banco Neon tem um endereço próprio, `ep-xxx.sa-east-1.aws.neon.tech`.
 O sistema imprime esse endereço (nunca a senha) em dois lugares. Se os dois
 forem iguais, terminal e site estão falando com o mesmo banco.
 
-1. **O que o site está usando** — Vercel → projeto `fiat-mvp` → **Logs** →
+1. **O que o site está usando** — Vercel → projeto da Essencial Fit → **Logs** →
    pesquise `banco de dados`. A linha mostra `"host":"ep-xxx…"`. Ela é gravada
    quando a função sobe, então se não aparecer, abra o formulário uma vez e
    pesquise de novo.

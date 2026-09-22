@@ -91,8 +91,27 @@ export const auditoria = pgTable("auditoria", {
   criadoEm: timestamp("criado_em", { withTimezone: true }).notNull().defaultNow(),
 });
 
+/** Pedidos de demonstração enviados pelo formulário da landing. */
+export const solicitacoesContato = pgTable(
+  "solicitacoes_contato",
+  {
+    id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+    nome: text("nome").notNull(),
+    empresa: text("empresa").notNull(),
+    contato: text("contato").notNull(), // E.164 phone or lower-cased e-mail
+    mensagem: text("mensagem").notNull(),
+    consentimentoVersao: text("consentimento_versao").notNull(),
+    ipHash: text("ip_hash"),
+    userAgent: text("user_agent"),
+    criadoEm: timestamp("criado_em", { withTimezone: true }).notNull().defaultNow(),
+    atendidoEm: timestamp("atendido_em", { withTimezone: true }),
+  },
+  (t) => [index("solicitacoes_contato_ip_hash_criado_idx").on(t.ipHash, t.criadoEm.desc())],
+);
+
 export type Evento = typeof eventos.$inferSelect;
 export type Vendedor = typeof vendedores.$inferSelect;
 export type Lead = typeof leads.$inferSelect;
 export type NovoLead = typeof leads.$inferInsert;
 export type Consentimento = typeof consentimentos.$inferSelect;
+export type SolicitacaoContato = typeof solicitacoesContato.$inferSelect;

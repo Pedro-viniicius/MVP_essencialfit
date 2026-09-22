@@ -15,6 +15,13 @@
       "when": 1789363703119,
       "tag": "0001_leads_ip_hash_idx",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789520403538,
+      "tag": "0002_solicitacoes_contato",
+      "breakpoints": true
     }
   ]
 }

@@ -15,7 +15,7 @@ import { gerarSegredoBase32, uriOtpauth } from "../src/lib/admin/totp";
 const rotate = process.argv.includes("--rotate");
 const existente = (process.env.ADMIN_TOTP_SECRET ?? "").trim();
 
-console.log("\nConfiguração TOTP — Fiat Day\n");
+console.log("\nConfiguração TOTP — Essencial Fit\n");
 
 if (existente && !rotate) {
   console.log("ADMIN_TOTP_SECRET já está configurado neste ambiente (" + (process.env.ENV_FILE ?? ".env") + ").\n");
@@ -36,7 +36,7 @@ if (rotate && existente) {
 }
 
 const segredo = gerarSegredoBase32();
-const uri = uriOtpauth(segredo, "admin", "Fiat Day");
+const uri = uriOtpauth(segredo, "admin", "Essencial Fit");
 
 console.log("Chave (ADMIN_TOTP_SECRET):\n" + segredo + "\n");
 console.log("URI TOTP:\n" + uri + "\n");

@@ -11,6 +11,7 @@ import { descreverProblemas, validarConfigAdmin } from "@/lib/admin/config";
 import { apagarCookieSessao, criarTokenSessao, destinoSeguro, gravarCookieSessao, sessaoAtual } from "@/lib/admin/session";
 import { verificarTotp } from "@/lib/admin/totp";
 import { log } from "@/lib/logger";
+import { USAR_MOCKS } from "@/lib/mock/config";
 import { extrairIp, hashIp } from "@/lib/security/ip-hash";
 import { A } from "@/lib/texts/admin";
 
@@ -31,6 +32,7 @@ function iguais(a: string, b: string): boolean {
 
 async function falhasRecentes(ipHash: string | null): Promise<number> {
   const desde = new Date(Date.now() - JANELA_MIN * 60_000);
+  if (USAR_MOCKS) return (await import("@/lib/mock/loja")).falhasDeLogin(ipHash, desde);
   const porIp = ipHash ? sql`${auditoria.metadados}->>'ipHash' = ${ipHash}` : sql`true`;
   const [{ total }] = await db
     .select({ total: count() })
@@ -60,6 +62,10 @@ export async function entrarAction(_estado: EstadoLogin, form: FormData): Promis
     return { erro: A.login.bloqueado(JANELA_MIN) };
   }
 
+  // Modo de teste: os segredos são marcadores, não valores reais — conferir
+  // não provaria nada. Qualquer senha e qualquer código entram.
+  if (USAR_MOCKS) return abrirSessao(next, ipHash);
+
   // Both checks always run, so timing does not tell which one failed.
   const senhaOk = iguais(senha, senhaEsperada);
   const codigoOk = verificarTotp(segredoTotp, codigo);
@@ -70,10 +76,25 @@ export async function entrarAction(_estado: EstadoLogin, form: FormData): Promis
     return { erro: A.login.erro };
   }
 
+  return abrirSessao(next, ipHash);
+}
+
+/** Cria o cookie assinado, deixa a linha de auditoria e leva ao destino. */
+async function abrirSessao(next: string, ipHash: string | null): Promise<never> {
   const { token, sessao } = criarTokenSessao();
   await registrarAuditoria(db, { acao: "login_ok", entidade: "admin", usuarioId: sessao.id, metadados: { ipHash } });
   await gravarCookieSessao(token);
   redirect(next);
+}
+
+/**
+ * Só existe com o modo de teste ligado (`src/lib/mock/config.ts`): abre o
+ * painel sem senha e sem autenticador, para conferir as telas. Com a flag
+ * desligada a ação recusa e devolve o visitante ao login normal.
+ */
+export async function entrarComoTesteAction(form: FormData): Promise<void> {
+  if (!USAR_MOCKS) redirect("/admin/login");
+  await abrirSessao(destinoSeguro(String(form.get("next") ?? "")), null);
 }
 
 export async function sairAction() {

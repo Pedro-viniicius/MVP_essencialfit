@@ -1,5 +1,6 @@
 import { and, count, desc, eq, inArray, isNull, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
+import { USAR_MOCKS } from "@/lib/mock/config";
 import { auditoria, consentimentos, eventos, leads, vendedores } from "@/lib/db/schema";
 import type { Finalidade } from "@/lib/domain";
 import { DEMO_SLUG } from "./constantes";
@@ -9,12 +10,20 @@ import { mascararEmail, mascararNome, mascararTelefone } from "./mascara";
  * Every query here takes the demo event id resolved from DEMO_SLUG and
  * filters on it. The page never receives an event from the URL, so real
  * leads cannot reach this screen whatever the query string says.
+ *
+ * Com o modo de teste ligado cada função desvia para `src/lib/mock/loja.ts`,
+ * que responde o mesmo formato lendo dados fictícios em memória. O SQL abaixo
+ * continua sendo o caminho de produção — ver MOCKS.md.
  */
 const FUSO = "America/Sao_Paulo";
 export const TAMANHO_PAGINA = 20;
-export const PRAZOS_ATE_3_MESES = ["Este mês", "Em até 3 meses"];
+export const PRAZOS_ATE_3_MESES = ["Hoje", "Nos próximos 30 dias"];
+
+/** Carregada só quando a flag está ligada; fora do modo de teste nem entra no bundle. */
+const emMemoria = () => import("@/lib/mock/loja");
 
 export async function eventoDemo() {
+  if (USAR_MOCKS) return (await emMemoria()).eventoDemo();
   const [e] = await db
     .select({ id: eventos.id, nome: eventos.nome, inicio: eventos.inicio, retencaoMeses: eventos.retencaoMeses, ativo: eventos.ativo })
     .from(eventos)
@@ -24,10 +33,11 @@ export async function eventoDemo() {
 }
 
 export async function resumo(eventoId: string) {
+  if (USAR_MOCKS) return (await emMemoria()).resumo(eventoId);
   const [r] = await db
     .select({
       total: count(),
-      ate3Meses: sql<number>`count(*) filter (where ${leads.prazoCompra} in ('Este mês', 'Em até 3 meses'))`.mapWith(Number),
+      ate3Meses: sql<number>`count(*) filter (where ${leads.prazoCompra} in ('Hoje', 'Nos próximos 30 dias'))`.mapWith(Number),
       comVendedor: sql<number>`count(*) filter (where ${leads.vendedorId} is not null)`.mapWith(Number),
       vendedores: sql<number>`count(distinct ${leads.vendedorId})`.mapWith(Number),
     })
@@ -52,6 +62,7 @@ export async function resumo(eventoId: string) {
 }
 
 export async function porHora(eventoId: string) {
+  if (USAR_MOCKS) return (await emMemoria()).porHora(eventoId);
   // Literal timezone: a bound parameter would make GROUP BY and SELECT differ ($1 vs $2).
   const hora = sql<number>`extract(hour from ${leads.criadoEm} at time zone ${sql.raw(`'${FUSO}'`)})`.mapWith(Number);
   return db
@@ -63,6 +74,7 @@ export async function porHora(eventoId: string) {
 }
 
 export async function porVendedor(eventoId: string) {
+  if (USAR_MOCKS) return (await emMemoria()).porVendedor(eventoId);
   return db
     .select({ id: vendedores.id, nome: vendedores.nome, total: count() })
     .from(leads)
@@ -73,6 +85,7 @@ export async function porVendedor(eventoId: string) {
 }
 
 export async function porModelo(eventoId: string) {
+  if (USAR_MOCKS) return (await emMemoria()).porModelo(eventoId);
   return db
     .select({ rotulo: leads.modeloInteresse, total: count() })
     .from(leads)
@@ -82,6 +95,7 @@ export async function porModelo(eventoId: string) {
 }
 
 export async function porPrazo(eventoId: string) {
+  if (USAR_MOCKS) return (await emMemoria()).porPrazo(eventoId);
   return db
     .select({ rotulo: leads.prazoCompra, total: count() })
     .from(leads)
@@ -91,6 +105,7 @@ export async function porPrazo(eventoId: string) {
 }
 
 export async function porOrigem(eventoId: string) {
+  if (USAR_MOCKS) return (await emMemoria()).porOrigem(eventoId);
   return db
     .select({ rotulo: leads.origem, total: count() })
     .from(leads)
@@ -100,6 +115,7 @@ export async function porOrigem(eventoId: string) {
 }
 
 export async function revelacoesHoje() {
+  if (USAR_MOCKS) return (await emMemoria()).revelacoesHoje();
   const [r] = await db
     .select({ total: count() })
     .from(auditoria)
@@ -150,6 +166,7 @@ export type LinhaLista = {
 };
 
 export async function listar(eventoId: string, f: Filtros) {
+  if (USAR_MOCKS) return (await emMemoria()).listar(eventoId, f);
   const onde = condicoes(eventoId, f);
   const [{ total }] = await db.select({ total: count() }).from(leads).where(onde);
   const linhas = await db
@@ -204,6 +221,7 @@ export async function listar(eventoId: string, f: Filtros) {
 
 /** Full values of one demo lead, for the "Revelar" action; caller writes the audit row. */
 export async function buscarCompleto(eventoId: string, leadId: string) {
+  if (USAR_MOCKS) return (await emMemoria()).buscarCompleto(eventoId, leadId);
   const [l] = await db
     .select({ id: leads.id, nome: leads.nome, telefone: leads.telefone, email: leads.email })
     .from(leads)
@@ -214,6 +232,7 @@ export async function buscarCompleto(eventoId: string, leadId: string) {
 
 /** Rows for the CSV. By default only people who consented to marketing. */
 export async function paraExportacao(eventoId: string, incluirSemConsentimento: boolean) {
+  if (USAR_MOCKS) return (await emMemoria()).paraExportacao(eventoId, incluirSemConsentimento);
   const onde = incluirSemConsentimento
     ? eq(leads.eventoId, eventoId)
     : and(eq(leads.eventoId, eventoId), consentiu("marketing"));
@@ -237,6 +256,7 @@ export async function paraExportacao(eventoId: string, incluirSemConsentimento: 
 }
 
 export async function opcoesFiltro(eventoId: string) {
+  if (USAR_MOCKS) return (await emMemoria()).opcoesFiltro(eventoId);
   const [vs, ms, ps] = await Promise.all([porVendedor(eventoId), porModelo(eventoId), porPrazo(eventoId)]);
   return {
     vendedores: vs.filter((v) => v.id).map((v) => ({ id: v.id!, nome: v.nome! })),

@@ -19,14 +19,14 @@ import { DEMO_SLUG } from "../src/lib/demo/constantes";
 import { POLITICA_VERSAO } from "../src/lib/texts/privacy";
 
 const EVENTO = {
-  slug: "fiat19",
-  nome: "Fiat Day — 19 de setembro",
+  slug: "essencial-fit",
+  nome: "Experiência Essencial Fit",
   // Deliberately wide window in America/Sao_Paulo (UTC-3, no DST in 2026).
   inicio: new Date("2026-09-19T07:00:00-03:00"),
   fim: new Date("2026-09-19T23:59:59-03:00"),
   politicaVersao: POLITICA_VERSAO,
   retencaoMeses: 12,
-  modelos: ["Strada", "Toro", "Pulse", "Fastback", "Argo", "Mobi"],
+  modelos: ["Creatina", "Whey Protein", "Vitaminas e saúde", "Snacks saudáveis", "Acessórios", "Quero orientação"],
 };
 
 const QTD_VENDEDORES = 8;
@@ -82,7 +82,7 @@ async function main() {
       );
       const inseridos = await tx
         .insert(vendedores)
-        .values(codigos.map((codigo) => ({ codigo, nome: `Vendedor ${codigo}` })))
+        .values(codigos.map((codigo) => ({ codigo, nome: `Ponto ${codigo}` })))
         .onConflictDoNothing({ target: vendedores.codigo })
         .returning({ codigo: vendedores.codigo });
       console.log(

@@ -11,7 +11,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx scripts/seed.ts",
-    "vercel-build": "drizzle-kit migrate && next build",
+    "vercel-build": "sh scripts/vercel-build.sh",
     "db:seed:prod": "sh scripts/prod.sh scripts/seed.ts",
     "db:whoami": "tsx scripts/db-whoami.ts",
     "db:whoami:prod": "sh scripts/prod.sh scripts/db-whoami.ts",

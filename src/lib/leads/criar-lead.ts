@@ -6,6 +6,7 @@ import { FINALIDADES } from "@/lib/domain";
 import { registrarAuditoria } from "@/lib/admin/audit";
 import { gerarCupom } from "@/lib/coupon";
 import { log } from "@/lib/logger";
+import { USAR_MOCKS } from "@/lib/mock/config";
 import { verificarLimite } from "@/lib/security/rate-limit";
 import type { LeadParsed } from "@/lib/validation/lead";
 
@@ -37,6 +38,10 @@ export async function criarLead(
   dados: LeadParsed,
   contexto: { ipHash: string | null; userAgent: string | null },
 ): Promise<ResultadoCriacao> {
+  // Modo de teste: as mesmas regras (idempotência, telefone repetido, ponto
+  // desconhecido), gravadas em memória em vez de no Postgres. Ver MOCKS.md.
+  if (USAR_MOCKS) return (await import("@/lib/mock/loja")).criarLead(evento, dados, contexto);
+
   const repetido = await buscarPorChave(dados.chaveIdempotencia);
   if (repetido) return { status: "repetido", ...repetido };
 
